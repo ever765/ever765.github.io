@@ -92,11 +92,13 @@
 <meta property="og:site_name" content="eastShine">
 <meta property="og:description" content="首先了解一下 “CGContextRef” ： “ An opaque type that represents a Quartz 2D drawing environment. ““ Graphics Context是图形上下文,可以将其理解为一块画布,我们可以在上面进行绘画操作,绘制完成后,将画布放到我们的view中显示即可,view看作是一个画框. “
 自定义PayPassWordView类">
-<meta property="og:updated_time" content="2017-01-06T06:54:14.000Z">
+<meta property="og:image" content="http://ojcna80i7.bkt.clouddn.com/PayPassWorld.jpg">
+<meta property="og:updated_time" content="2017-01-06T08:41:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IOS运用CGContextRef画支付框">
 <meta name="twitter:description" content="首先了解一下 “CGContextRef” ： “ An opaque type that represents a Quartz 2D drawing environment. ““ Graphics Context是图形上下文,可以将其理解为一块画布,我们可以在上面进行绘画操作,绘制完成后,将画布放到我们的view中显示即可,view看作是一个画框. “
 自定义PayPassWordView类">
+<meta name="twitter:image" content="http://ojcna80i7.bkt.clouddn.com/PayPassWorld.jpg">
 
 
 
@@ -296,6 +298,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/01/06/first-news/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/06/first-news/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -320,8 +332,8 @@
       
         <p>首先了解一下 “CGContextRef” ：<br> “ An opaque type that represents a Quartz 2D drawing environment. “<br>“ Graphics Context是图形上下文,可以将其理解为一块画布,我们可以在上面进行绘画操作,绘制完成后,将画布放到我们的view中显示即可,view看作是一个画框. “</p>
 <h2 id="自定义PayPassWordView类"><a href="#自定义PayPassWordView类" class="headerlink" title="自定义PayPassWordView类"></a>自定义PayPassWordView类</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#import &lt;UIKit/UIKit.h&gt;</span></div><div class="line"></div><div class="line">@interface PayPassWordView : UIView</div><div class="line"><span class="string">"//设置输入的支付密码"</span></div><div class="line">@property (nonatomic, strong)NSString *str;</div><div class="line"></div><div class="line"><span class="string">"//设置圆角"</span></div><div class="line"></div><div class="line">@property (nonatomic, assign)CGFloat cornerRadius;</div><div class="line">@end</div></pre></td></tr></table></figure>
-<h2 id="实现PayPassWordView类"><a href="#实现PayPassWordView类" class="headerlink" title="实现PayPassWordView类"></a>实现PayPassWordView类</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#import "PayPassWordView.h"</span></div><div class="line"></div><div class="line">@implementation PayPassWordView</div><div class="line"></div><div class="line"></div><div class="line">- (void)drawRect:(CGRect)rect &#123;</div><div class="line"></div><div class="line">[super drawRect:rect];</div><div class="line"></div><div class="line"><span class="string">"//An opaque type that represents a Quartz 2D drawing environment."</span></div><div class="line"><span class="string">"//一个不透明类型的Quartz 2D绘画环境,相当于一个画布,你可以在上面任意绘画  "</span></div><div class="line">CGContextRef context = UIGraphicsGetCurrentContext();</div><div class="line"></div><div class="line"><span class="string">"//计算密码框的宽度"</span></div><div class="line"><span class="built_in">float</span> fw = ScreenWidth() - ViewWidth(102);</div><div class="line"><span class="string">"//计算密码框的宽度"</span></div><div class="line"><span class="built_in">float</span> fh = (ScreenWidth() - ViewWidth(102))/6;</div><div class="line"><span class="string">"//圆角的大小"</span></div><div class="line">CGFloat f = ViewWidth(_cornerRadius);</div><div class="line"><span class="string">"// 开始坐标右边开始"</span></div><div class="line">CGContextMoveToPoint(context, fw, fh - f);  </div><div class="line"><span class="string">"// 绘制右下角圆角"</span></div><div class="line">CGContextAddArcToPoint(context, fw, fh, fw - f, fh, f / 2); </div><div class="line"><span class="string">"// 绘制左下角圆角"</span></div><div class="line">CGContextAddArcToPoint(context, ViewWidth(1), fh, ViewWidth(1) , fh - f , f / 2);</div><div class="line"><span class="string">"// 绘制左上角圆角"</span></div><div class="line">CGContextAddArcToPoint(context, ViewWidth(1) , ViewWidth(1),  f, ViewWidth(1), f / 2); </div><div class="line"><span class="string">"// 绘制右上角圆角"</span></div><div class="line">CGContextAddArcToPoint(context, fw, ViewWidth(1), fw, f, f / 2); </div><div class="line"><span class="string">"// 将圆角矩形封起来"</span></div><div class="line">CGContextClosePath(context);</div><div class="line"></div><div class="line"><span class="string">"//绘制第一条分割线"</span></div><div class="line">CGContextMoveToPoint(context, fh, ViewWidth(1));</div><div class="line">CGContextAddLineToPoint(context, fh,fh);</div><div class="line"><span class="string">"//绘制第二条分割线"</span></div><div class="line">CGContextMoveToPoint(context,2 * fh, ViewWidth(1));</div><div class="line">CGContextAddLineToPoint(context, 2 * fh,fh);</div><div class="line"><span class="string">"//绘制第仨条分割线"</span></div><div class="line">CGContextMoveToPoint(context, 3 * fh, ViewWidth(1));</div><div class="line">CGContextAddLineToPoint(context, 3 * fh,fh);</div><div class="line"><span class="string">"//绘制第四条分割线"</span></div><div class="line">CGContextMoveToPoint(context, 4 * fh, ViewWidth(1));</div><div class="line">CGContextAddLineToPoint(context, 4 * fh,fh);</div><div class="line"><span class="string">"//绘制第五条分割线"</span></div><div class="line">CGContextMoveToPoint(context, 5 * fh, ViewWidth(1));</div><div class="line">CGContextAddLineToPoint(context, 5 * fh,fh);</div><div class="line"></div><div class="line"><span class="string">"// 设置画笔颜色"</span></div><div class="line">CGContextSetRGBStrokeColor(context, 0.5, 0.5, 0.5, 0.5);</div><div class="line"><span class="string">"//根据上述坐标绘制路径"</span></div><div class="line">CGContextStrokePath(context);</div><div class="line"></div><div class="line"><span class="keyword">for</span> (NSInteger i = 0 ; i&lt;_str.length; i++) &#123;</div><div class="line"><span class="string">"根据支付密码位数，绘制黑色小圆点"</span></div><div class="line">CGContextFillEllipseInRect(context, CGRectMake(fh / 2 - 5 + i*fh, fh / 2 - 5, 10, 10));</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">- (void)<span class="built_in">set</span>Str:(NSString *)str</div><div class="line">&#123;</div><div class="line"><span class="string">"//设置输入的支付密码"</span></div><div class="line">_str = str;</div><div class="line"><span class="string">"//重绘界面"</span></div><div class="line">[self <span class="built_in">set</span>NeedsDisplay];</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
-<p>最后奉上效果图<br>{％img [PayPassWorld] /（<a href="https://hexo.io/images/PayPassWorld）" target="_blank" rel="external">https://hexo.io/images/PayPassWorld）</a> / to / image [400] [1000] [title text [alt text]]％}</p>
+<h2 id="实现PayPassWordView类"><a href="#实现PayPassWordView类" class="headerlink" title="实现PayPassWordView类"></a>实现PayPassWordView类</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#import "PayPassWordView.h"</span></div><div class="line"></div><div class="line">@implementation PayPassWordView</div><div class="line"></div><div class="line"></div><div class="line">- (void)drawRect:(CGRect)rect &#123;</div><div class="line"></div><div class="line">[super drawRect:rect];</div><div class="line"></div><div class="line"><span class="string">"//An opaque type that represents a Quartz 2D drawing environment."</span></div><div class="line"><span class="string">"//一个不透明类型的Quartz 2D绘画环境,相当于一个画布,你可以在上面任意绘画  "</span></div><div class="line">CGContextRef context = UIGraphicsGetCurrentContext();</div><div class="line"></div><div class="line"><span class="string">"//计算密码框的宽度"</span></div><div class="line"><span class="built_in">float</span> fw = ScreenWidth() - ViewWidth(102);</div><div class="line"><span class="string">"//计算密码框的宽度"</span></div><div class="line"><span class="built_in">float</span> fh = (ScreenWidth() - ViewWidth(102))/6;</div><div class="line"><span class="string">"//圆角的大小"</span></div><div class="line">CGFloat f = ViewWidth(_cornerRadius);</div><div class="line"><span class="string">"// 开始坐标右边开始"</span></div><div class="line">CGContextMoveToPoint(context, fw, fh - f);  </div><div class="line"><span class="string">"// 绘制右下角圆角"</span></div><div class="line">CGContextAddArcToPoint(context, fw, fh, fw - f, fh, f / 2); </div><div class="line"><span class="string">"// 绘制左下角圆角"</span></div><div class="line">CGContextAddArcToPoint(context, ViewWidth(1), fh, ViewWidth(1) , fh - f , f / 2);</div><div class="line"><span class="string">"// 绘制左上角圆角"</span></div><div class="line">CGContextAddArcToPoint(context, ViewWidth(1) , ViewWidth(1),  f, ViewWidth(1), f / 2); </div><div class="line"><span class="string">"// 绘制右上角圆角"</span></div><div class="line">CGContextAddArcToPoint(context, fw, ViewWidth(1), fw, f, f / 2); </div><div class="line"><span class="string">"// 将圆角矩形封起来"</span></div><div class="line">CGContextClosePath(context);</div><div class="line"></div><div class="line"><span class="string">"//绘制第一条分割线"</span></div><div class="line">CGContextMoveToPoint(context, fh, ViewWidth(1));</div><div class="line">CGContextAddLineToPoint(context, fh,fh);</div><div class="line"><span class="string">"//绘制第二条分割线"</span></div><div class="line">CGContextMoveToPoint(context,2 * fh, ViewWidth(1));</div><div class="line">CGContextAddLineToPoint(context, 2 * fh,fh);</div><div class="line"><span class="string">"//绘制第仨条分割线"</span></div><div class="line">CGContextMoveToPoint(context, 3 * fh, ViewWidth(1));</div><div class="line">CGContextAddLineToPoint(context, 3 * fh,fh);</div><div class="line"><span class="string">"//绘制第四条分割线"</span></div><div class="line">CGContextMoveToPoint(context, 4 * fh, ViewWidth(1));</div><div class="line">CGContextAddLineToPoint(context, 4 * fh,fh);</div><div class="line"><span class="string">"//绘制第五条分割线"</span></div><div class="line">CGContextMoveToPoint(context, 5 * fh, ViewWidth(1));</div><div class="line">CGContextAddLineToPoint(context, 5 * fh,fh);</div><div class="line"></div><div class="line"><span class="string">"// 设置画笔颜色"</span></div><div class="line">CGContextSetRGBStrokeColor(context, 0.5, 0.5, 0.5, 0.5);</div><div class="line"><span class="string">"//根据上述坐标绘制路径"</span></div><div class="line">CGContextStrokePath(context);</div><div class="line"></div><div class="line"><span class="keyword">for</span> (NSInteger i = 0 ; i&lt;_str.length; i++) &#123;</div><div class="line"><span class="string">"根据支付密码位数，绘制黑色小圆点"</span></div><div class="line">CGContextFillEllipseInRect(context, CGRectMake(fh / 2 - 5 + i*fh, fh / 2 - 5, 10, 10));</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="string">"//实现str的set方法"</span></div><div class="line"></div><div class="line">- (void)<span class="built_in">set</span>Str:(NSString *)str</div><div class="line">&#123;</div><div class="line"><span class="string">"//设置输入的支付密码"</span></div><div class="line">_str = str;</div><div class="line"><span class="string">"//重绘界面"</span></div><div class="line">[self <span class="built_in">set</span>NeedsDisplay];</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>最后奉上效果图<br><img src="http://ojcna80i7.bkt.clouddn.com/PayPassWorld.jpg" alt="PayPassWorld"></p>
 <p>OK，完成。<br>希望可以对大家有帮助，当然其他方法还有很多。在这里就不一一列举！</p>
 
       
@@ -382,6 +394,10 @@
 
           
   <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/01/06/first-news/"
+           data-title="IOS运用CGContextRef画支付框" data-url="http://yoursite.com/2017/01/06/first-news/">
+      </div>
     
   </div>
 
@@ -585,32 +601,37 @@
 
   
 
+  
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"wdxboke"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
 
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
   
 
 
 
 
-	
 
 
 
 
-
-  
-
-
-
-
-
-  
-
-  
-      <!-- UY BEGIN -->
-      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
-      <!-- UY END -->
-  
 
 
 
