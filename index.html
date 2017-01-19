@@ -1,864 +1,194 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>eastShine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     
-  
-
-  
-
-  
-
-  
-
-  
-
-  
+      <link rel="icon" href="/favicon.png">
     
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/js/google-code-prettify/download.css">
+
+    <link rel="stylesheet" href="/js/google-code-prettify/tomorrow-night-eighties.min.css">
+
+  </head>
+
+  <body>
+
+<header>
+	<a id="logo" href="/" title="eastShine">
+	<img src="/favicon.png" alt="eastShine"></a>
+	
+	
+		<!--搜索栏-->
+		<i class="js-toggle-search iconfont icon-search"></i>
 
 
+<form class="js-search search-form search-form--modal" method="get" action="http://gushi.li" role="search">
+	<div class="search-form__inner">
+		<div>
+			<i class="iconfont icon-search"></i>
+			<input class="text-input" placeholder="Enter Key..." type="search">
+		</div>
+	</div>
+</form>
+	
 
+	
+		<!--侧边导航栏-->
+		<a id="nav-toggle" href="#"><span></span></a>
 
+<nav>
+	<div class="menu-top-container">
+		<ul id="menu-top" class="menu">
+			
+				
+				<li class="current-menu-item">
+					<a href="http://weibo.com/u/5789752029/home?wvr=5" target="_blank">Weibo</a>
+				</li>
+			
+		</ul>
+	</div>
+</nav>
+	
 
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
-
-
-
-
-
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="eastShine">
-<meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="eastShine">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="eastShine">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://yoursite.com/"/>
-
-
-
-
-
-  <title> eastShine </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
-
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">eastShine</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-    
-      <p class="site-subtitle"></p>
-    
+</header>
+<div class="m-header ">
+	<section id="hero1" class="hero">
+		<div class="inner">
+		</div>
+	</section>
+	
+		<figure class="top-image" data-enable=true></figure>
+	
 </div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
+<!--文章列表-->
+<div class="wrapper">
   
-
-  
-    <ul id="menu" class="menu">
+    <ul class="posts-list mb+ js-posts">
       
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
+                <!--<div class="type">
+          <div class="mask">
+            <i class="iconfont"></i>
+          </div>
+          </div>-->
+        <li class="post">
+          
+            <i class="post-status iconfont icon-icon"></i>  
+          
+          <h2 class="no-background"  >
+            <span><a href="/2017/01/17/2017_1_17/">UIScrollView上下联动menu的实现</a></span>
+            <time class="post-time" datetime="2017-01-17T09:30:14.000Z" itemprop="datePublished">2017-01-17</time>
+          </h2>
         </li>
       
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
+                <!--<div class="type">
+          <div class="mask">
+            <i class="iconfont"></i>
+          </div>
+          </div>-->
+        <li class="post">
+          
+          <h2 class="no-background"  >
+            <span><a href="/2017/01/06/first-news/">IOS运用CGContextRef画支付框</a></span>
+            <time class="post-time" datetime="2017-01-06T06:50:53.000Z" itemprop="datePublished">2017-01-06</time>
+          </h2>
         </li>
       
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
+                <!--<div class="type">
+          <div class="mask">
+            <i class="iconfont"></i>
+          </div>
+          </div>-->
+        <li class="post">
+          
+          <h2 class="no-background"  >
+            <span><a href="/2017/01/06/hello-world/">Hello World</a></span>
+            <time class="post-time" datetime="2017-01-06T02:56:21.000Z" itemprop="datePublished">2017-01-06</time>
+          </h2>
         </li>
-      
-
       
     </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-  <section id="posts" class="posts-expand">
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/17/2017_1_17/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Json">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="eastShine">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="eastShine" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/17/2017_1_17/" itemprop="url">
-                  UIScrollView上下联动menu的实现
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-17T17:30:14+08:00">
-                2017-01-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/01/17/2017_1_17/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/17/2017_1_17/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
     
 
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="自定义Button"><a href="#自定义Button" class="headerlink" title="自定义Button"></a>自定义Button</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#import &lt;UIKit/UIKit.h&gt;</span></div><div class="line"></div><div class="line">@interface WDXButton : UIButton</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
-<h2 id="实现Button类"><a href="#实现Button类" class="headerlink" title="实现Button类"></a>实现Button类</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#import "WDXButton.h"</span></div><div class="line"></div><div class="line">@implementation WDXButton</div><div class="line">UIView *_view;</div><div class="line"></div><div class="line">- (void)<span class="built_in">set</span>Selected:(BOOL)selected</div><div class="line">&#123;</div><div class="line">[super <span class="built_in">set</span>Selected:selected];</div><div class="line"><span class="keyword">if</span> (!_view) &#123;</div><div class="line">_view = [[UIView alloc] initWithFrame:CGRectMake(0,  ViewWidth(75), self.frame.size.width, ViewWidth(4))];</div><div class="line">_view.backgroundColor = BACKGROUND;</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span> (selected) &#123;</div><div class="line">[self <span class="built_in">set</span>TitleColor:[UIColor orangeColor] <span class="keyword">for</span>State:UIControlStateSelected];</div><div class="line">[UIView animateWithDuration:0.5 animations:^&#123;</div><div class="line">self.transform = CGAffineTransformMakeScale(1.2, 1.2);</div><div class="line">[self addSubview:_view];</div><div class="line">&#125; completion:^(BOOL finished) &#123;</div><div class="line"></div><div class="line">&#125;];</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line"> [_view removeFromSuperview];</div><div class="line">[self <span class="built_in">set</span>TitleColor:[UIColor blackColor] <span class="keyword">for</span>State:UIControlStateNormal];</div><div class="line">self.transform = CGAffineTransformIdentity;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
-<p>最后奉上效果图<br><img src="http://ojcna80i7.bkt.clouddn.com/button.png" alt="PayPassWorld"></p>
-<p>然后就可以将button添加到uiscrollerView就可以实现了在别处调用时代码如下<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">@implementation viewController</div><div class="line"> NotButton *_lastButton;</div><div class="line">”//创建button“</div><div class="line"><span class="keyword">for</span> (NSInteger i = 0 ; i&lt;array.count; i++) &#123;</div><div class="line">NotButton *button = [NotButton buttonWithType:UIButtonTypeCustom];</div><div class="line">button.frame = CGRectMake(ViewWidth(30)+ScreenWidth()/3*i, 0, rect.size.width, ViewWidth(100));</div><div class="line">button.titleLabel.font = [UIFont systemFontOfSize:titleFontSize];</div><div class="line">[button <span class="built_in">set</span>Title:array[i] <span class="keyword">for</span>State:UIControlStateNormal];</div><div class="line">[button addTarget:self action:@selector(buttonAction:) <span class="keyword">for</span>ControlEvents:UIControlEventTouchDown];</div><div class="line">button.tag = i;</div><div class="line">[button <span class="built_in">set</span>TitleColor:UIColorFromRGB(0x333333) <span class="keyword">for</span>State:UIControlStateNormal];</div><div class="line">[view addSubview:button];</div><div class="line"></div><div class="line">UIView *linView = [[UIView alloc] initWithFrame:CGRectMake(ScreenWidth()/3  * (i + 1), 0, 1, rect.size.height)];</div><div class="line">linView.backgroundColor = LINECOLOR;</div><div class="line">linView.center = CGPointMake(linView.center.x, ViewWidth(50));</div><div class="line">[view addSubview:linView];</div><div class="line"><span class="keyword">if</span> (i == 0) &#123;</div><div class="line">_lastButton = button;</div><div class="line">_lastButton.selected = YES;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">- (void)buttonAction:(NotButton *)button&#123;</div><div class="line"><span class="keyword">if</span> (_lastButton) &#123;</div><div class="line">[_lastButton <span class="built_in">set</span>Selected:NO];</div><div class="line">_lastButton = button;</div><div class="line">[_lastButton <span class="built_in">set</span>Selected:YES];</div><div class="line">“//这里写点击事件”</div><div class="line">&#125;</div><div class="line">NSLog(@<span class="string">"werwe"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure></p>
-<p>OK，完成。<br>本人初学者一枚，希望大牛可以提出宝贵的意见！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
   
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/06/first-news/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Json">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="eastShine">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="eastShine" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/06/first-news/" itemprop="url">
-                  IOS运用CGContextRef画支付框
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-06T14:50:53+08:00">
-                2017-01-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/01/06/first-news/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/06/first-news/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>首先了解一下 “CGContextRef” ：<br> “ An opaque type that represents a Quartz 2D drawing environment. “<br>“ Graphics Context是图形上下文,可以将其理解为一块画布,我们可以在上面进行绘画操作,绘制完成后,将画布放到我们的view中显示即可,view看作是一个画框. “</p>
-<h2 id="自定义PayPassWordView类"><a href="#自定义PayPassWordView类" class="headerlink" title="自定义PayPassWordView类"></a>自定义PayPassWordView类</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#import &lt;UIKit/UIKit.h&gt;</span></div><div class="line"></div><div class="line">@interface PayPassWordView : UIView</div><div class="line"><span class="string">"//设置输入的支付密码"</span></div><div class="line">@property (nonatomic, strong)NSString *str;</div><div class="line"></div><div class="line"><span class="string">"//设置圆角"</span></div><div class="line"></div><div class="line">@property (nonatomic, assign)CGFloat cornerRadius;</div><div class="line">@end</div></pre></td></tr></table></figure>
-<h2 id="实现PayPassWordView类"><a href="#实现PayPassWordView类" class="headerlink" title="实现PayPassWordView类"></a>实现PayPassWordView类</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#import "PayPassWordView.h"</span></div><div class="line"></div><div class="line">@implementation PayPassWordView</div><div class="line"></div><div class="line"></div><div class="line">- (void)drawRect:(CGRect)rect &#123;</div><div class="line"></div><div class="line">[super drawRect:rect];</div><div class="line"></div><div class="line"><span class="string">"//An opaque type that represents a Quartz 2D drawing environment."</span></div><div class="line"><span class="string">"//一个不透明类型的Quartz 2D绘画环境,相当于一个画布,你可以在上面任意绘画  "</span></div><div class="line">CGContextRef context = UIGraphicsGetCurrentContext();</div><div class="line"></div><div class="line"><span class="string">"//计算密码框的宽度"</span></div><div class="line"><span class="built_in">float</span> fw = ScreenWidth() - ViewWidth(102);</div><div class="line"><span class="string">"//计算密码框的宽度"</span></div><div class="line"><span class="built_in">float</span> fh = (ScreenWidth() - ViewWidth(102))/6;</div><div class="line"><span class="string">"//圆角的大小"</span></div><div class="line">CGFloat f = ViewWidth(_cornerRadius);</div><div class="line"><span class="string">"// 开始坐标右边开始"</span></div><div class="line">CGContextMoveToPoint(context, fw, fh - f);  </div><div class="line"><span class="string">"// 绘制右下角圆角"</span></div><div class="line">CGContextAddArcToPoint(context, fw, fh, fw - f, fh, f / 2); </div><div class="line"><span class="string">"// 绘制左下角圆角"</span></div><div class="line">CGContextAddArcToPoint(context, ViewWidth(1), fh, ViewWidth(1) , fh - f , f / 2);</div><div class="line"><span class="string">"// 绘制左上角圆角"</span></div><div class="line">CGContextAddArcToPoint(context, ViewWidth(1) , ViewWidth(1),  f, ViewWidth(1), f / 2); </div><div class="line"><span class="string">"// 绘制右上角圆角"</span></div><div class="line">CGContextAddArcToPoint(context, fw, ViewWidth(1), fw, f, f / 2); </div><div class="line"><span class="string">"// 将圆角矩形封起来"</span></div><div class="line">CGContextClosePath(context);</div><div class="line"></div><div class="line"><span class="string">"//绘制第一条分割线"</span></div><div class="line">CGContextMoveToPoint(context, fh, ViewWidth(1));</div><div class="line">CGContextAddLineToPoint(context, fh,fh);</div><div class="line"><span class="string">"//绘制第二条分割线"</span></div><div class="line">CGContextMoveToPoint(context,2 * fh, ViewWidth(1));</div><div class="line">CGContextAddLineToPoint(context, 2 * fh,fh);</div><div class="line"><span class="string">"//绘制第仨条分割线"</span></div><div class="line">CGContextMoveToPoint(context, 3 * fh, ViewWidth(1));</div><div class="line">CGContextAddLineToPoint(context, 3 * fh,fh);</div><div class="line"><span class="string">"//绘制第四条分割线"</span></div><div class="line">CGContextMoveToPoint(context, 4 * fh, ViewWidth(1));</div><div class="line">CGContextAddLineToPoint(context, 4 * fh,fh);</div><div class="line"><span class="string">"//绘制第五条分割线"</span></div><div class="line">CGContextMoveToPoint(context, 5 * fh, ViewWidth(1));</div><div class="line">CGContextAddLineToPoint(context, 5 * fh,fh);</div><div class="line"></div><div class="line"><span class="string">"// 设置画笔颜色"</span></div><div class="line">CGContextSetRGBStrokeColor(context, 0.5, 0.5, 0.5, 0.5);</div><div class="line"><span class="string">"//根据上述坐标绘制路径"</span></div><div class="line">CGContextStrokePath(context);</div><div class="line"></div><div class="line"><span class="keyword">for</span> (NSInteger i = 0 ; i&lt;_str.length; i++) &#123;</div><div class="line"><span class="string">"根据支付密码位数，绘制黑色小圆点"</span></div><div class="line">CGContextFillEllipseInRect(context, CGRectMake(fh / 2 - 5 + i*fh, fh / 2 - 5, 10, 10));</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="string">"//实现str的set方法"</span></div><div class="line"></div><div class="line">- (void)<span class="built_in">set</span>Str:(NSString *)str</div><div class="line">&#123;</div><div class="line"><span class="string">"//设置输入的支付密码"</span></div><div class="line">_str = str;</div><div class="line"><span class="string">"//重绘界面"</span></div><div class="line">[self <span class="built_in">set</span>NeedsDisplay];</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
-<p>最后奉上效果图<br><img src="http://ojcna80i7.bkt.clouddn.com/PayPassWorld.jpg" alt="PayPassWorld"></p>
-<p>OK，完成。<br>希望可以对大家有帮助，当然其他方法还有很多。在这里就不一一列举！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/06/hello-world/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Json">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="eastShine">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="eastShine" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/01/06/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-06T10:56:21+08:00">
-                2017-01-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/01/06/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/01/06/hello-world/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
-
-          
-          </div>
-          
-
-
-          
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview sidebar-panel sidebar-panel-active">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="Json" />
-          <p class="site-author-name" itemprop="name">Json</p>
-          <p class="site-description motion-element" itemprop="description"></p>
-        </div>
-        <nav class="site-state motion-element">
-        
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">3</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Json</span>
 </div>
 
 
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+
+
+
+<div class="fat-footer">
+	<div class="wrapper">
+		<div class="layout layout--center">
+			<div class="layout__item palm-mb">
+				<div class="media">
+					<img class="headimg" src='http://ojcna80i7.bkt.clouddn.com/avatar.gif' alt='Json'>
+					<div class="media__body">
+						<h4>eastShine</h4>
+						<p class='site-description'>null</p>
+					</div>
+				</div>
+				<div class="author-contact">
+					<ul>
+						
+							
+							<li>
+				        		<a href="http://weibo.com/u/5789752029/home?wvr=5" target="_blank">
+				        			
+				        				<i class="iconfont icon-weibo"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://github.com/ever765" target="_blank">
+				        			
+				        				<i class="iconfont icon-github"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://www.zhihu.com/people/wang-dong-xu-14/activities" target="_blank">
+				        			
+										<i class="iconfont icon-zhihu"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
+<footer class="footer" role="contentinfo">
+	<div class="wrapper wrapper--wide split split--responsive">
+		<span>Theme by <a href="http://github.com/yumemor">Yumemor</a>. Powered by <a href="http://hexo.io">Hexo</a></span>
+	</div>
+</footer>
 
-
-        
-
-        
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
-
-
-
-  
-
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"wdxboke"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-
-  
-    
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-
-</body>
+	<!-－这里导入了 lib.js 里面涵盖了 jQuery 等框架 所以注释掉-->
+	<!--<script src="http://lib.sinaapp.com/js/jquery/2.0/jquery.min.js"></script>-->
+	<script src="/js/lib.js"></script>
+	<script src="/js/google-code-prettify/prettify.js"></script>
+	<script src="/js/module.js"></script>
+	<script src="/js/script.js"></script>
+	<script type='text/javascript'>
+		//代码高亮
+		$(document).ready(function(){
+	 		$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   			prettyPrint();
+		});
+	</script>
+	</body>
 </html>
