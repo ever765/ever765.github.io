@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>UIScrollView上下联动MenuView的实现 | eastShine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+      <link rel="icon" href="/favicon.png">
+    
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/js/google-code-prettify/download.css">
+
+    <link rel="stylesheet" href="/js/google-code-prettify/tomorrow-night-eighties.min.css">
+
+  </head>
+
+  <body>
+
+<header>
+	<a id="logo" href="/" title="eastShine">
+	<img src="/favicon.png" alt="eastShine"></a>
+	
+	
+		<!--搜索栏-->
+		<i class="js-toggle-search iconfont icon-search"></i>
+
+
+<form class="js-search search-form search-form--modal" method="get" action="http://gushi.li" role="search">
+	<div class="search-form__inner">
+		<div>
+			<i class="iconfont icon-search"></i>
+			<input class="text-input" placeholder="Enter Key..." type="search">
+		</div>
+	</div>
+</form>
+	
+
+	
+		<!--侧边导航栏-->
+		<a id="nav-toggle" href="#"><span></span></a>
+
+<nav>
+	<div class="menu-top-container">
+		<ul id="menu-top" class="menu">
+			
+				
+				<li class="current-menu-item">
+					<a href="http://weibo.com/u/5789752029/home?wvr=5" target="_blank">Weibo</a>
+				</li>
+			
+		</ul>
+	</div>
+</nav>
+	
+
+</header>
+<div class="m-header ">
+	<section id="hero1" class="hero">
+		<div class="inner">
+		</div>
+	</section>
+	
+		<figure class="top-image" data-enable=true></figure>
+	
+</div>
+
+<!--文章列表-->
+<div class="wrapper">
+  
+    <!--文章-->
+<article>
+	
+  
+    <h1 class="post-title" itemprop="name">
+      UIScrollView上下联动MenuView的实现
+    </h1>
+  
+
+	<div class='post-body mb'>
+		<h2 id="定义头部-MenuView"><a href="#定义头部-MenuView" class="headerlink" title="定义头部 MenuView"></a>定义头部 MenuView</h2><pre><code class="bash">#import &lt;UIKit/UIKit.h&gt;
+
+@class MenuView;
+
+@protocol MenuViewDelegate &lt;NSObject&gt;
+
+- (void)menuView:(MenuView *)menuView didSelectIndex:(NSInteger)index;
+
+@end
+
+@interface MenuView : UIScrollView
+
+//每个按钮的title
+@property (nonatomic, strong)NSArray *titleNames;
+
+//每个按钮的颜色
+@property (nonatomic, strong)UIColor *selectColor;
+
+//每个按钮的颜色
+@property (nonatomic, strong)UIColor *normalColor;
+
+//每个按钮之间的间距   默认10px
+@property (nonatomic, assign)CGFloat buttonSpace;
+//设置背景颜色
+@property (nonatomic, strong)UIColor *backColor;
+//按钮titleLabel 字体大小
+@property (nonatomic, assign)CGFloat fontSize;
+//按钮的宽度
+@property (nonatomic, assign)CGFloat buttonWidth;
+//设置代理
+@property (nonatomic, weak)id &lt;MenuViewDelegate&gt; menuDelegate;
+//选中的按钮
+- (void)selectButtonWithIndex:(NSInteger)index;
+
+@end
+</code></pre>
+<h2 id="实现头部MenuView"><a href="#实现头部MenuView" class="headerlink" title="实现头部MenuView"></a>实现头部MenuView</h2><pre><code class="bash">#import &quot;MenuView.h&quot;
+#import &quot;CustomButton.h&quot;
+
+@interface MenuView (){
+NSMutableArray *_buttons;
+CustomButton *_lastButton;
+}
+
+@end
+
+@implementation MenuView
+
+- (instancetype)initWithFrame:(CGRect)frame{
+self = [super initWithFrame:frame];
+if (self) {
+_buttonSpace = 10;
+_selectColor = [UIColor redColor];
+_normalColor = [UIColor blackColor];
+_backColor = UIColorFromRGB(0xeeeeee);
+_buttons = [[NSMutableArray alloc] init];
+_fontSize = 13;
+
+}
+return self;
+}
+
+- (void)setTitleNames:(NSArray *)titleNames{
+
+_titleNames = titleNames;
+self.backgroundColor = _backColor;
+for (NSInteger index = 0; index &lt; _titleNames.count; index++) {
+CustomButton *button = [CustomButton buttonWithType:UIButtonTypeCustom];
+[button setTitle:titleNames[index] forState:UIControlStateNormal];
+button.frame = [self buttonFrameWithIndex:index];
+[button setTitleColor:_normalColor forState:UIControlStateNormal];
+[button setTitleColor:_selectColor forState:UIControlStateSelected];
+button.selectColor = _selectColor;
+button.titleLabel.font = [UIFont systemFontOfSize:_fontSize];
+button.tag = index;
+[button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchDown];
+[self addSubview:button];
+if (index == 0) {
+_lastButton = button;
+_lastButton.selected = YES;
+}
+[_buttons addObject:button];
+if (index == _titleNames.count - 1) {
+self.contentSize = CGSizeMake(CGRectGetMaxX(button.frame), VIEWHEIGHT);
+self.showsHorizontalScrollIndicator = NO;
+self.showsVerticalScrollIndicator = NO;
+}
+}
+}
+
+- (void)selectButtonWithIndex:(NSInteger)index
+{
+_lastButton.selected = NO;
+_lastButton = _buttons[index];
+_lastButton.selected = YES;
+if (_lastButton.frame.origin.x &gt; SCREENWIDTH - _lastButton.frame.size.width + _buttonSpace) {
+self.contentOffset = CGPointMake(_lastButton.frame.origin.x + _lastButton.frame.size.width + _buttonSpace - SCREENWIDTH , 0);
+}else{
+self.contentOffset = CGPointZero;
+}
+}
+
+- (void)buttonAction:(CustomButton *)button
+{
+if (![_lastButton isEqual:button]) {
+_lastButton.selected = NO;
+_lastButton = button;
+_lastButton.selected = YES;
+if ([_menuDelegate respondsToSelector:@selector(menuView:didSelectIndex:)]) {
+[_menuDelegate menuView:self didSelectIndex:button.tag];
+}
+}
+}
+
+- (CGRect)buttonFrameWithIndex:(NSInteger)index{
+CGRect rect;
+
+if (_buttonWidth) {
+rect =  CGRectMake(index  * (_buttonWidth +_buttonSpace) + _buttonSpace, VIEWHEIGHT / 4, _buttonWidth, VIEWHEIGHT / 2);
+}else{
+rect = CGRectMake(index * ((SCREENWIDTH - _titleNames.count * _buttonSpace)/_titleNames.count +_buttonSpace) + _buttonSpace, VIEWHEIGHT / 4, (SCREENWIDTH - _titleNames.count * _buttonSpace)/_titleNames.count, VIEWHEIGHT / 2);
+}
+return rect;
+}
+
+
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+// Drawing code
+}
+*/
+
+@end
+</code></pre>
+<p>最后奉上效果图<br><img src="http://ojcna80i7.bkt.clouddn.com/image1.png" alt="PayPassWorld"></p>
+<h1 id="在ViewControllers里调用方法为"><a href="#在ViewControllers里调用方法为" class="headerlink" title="在ViewControllers里调用方法为"></a>在ViewControllers里调用方法为</h1><pre><code class="bash">- (void)createMenuScrollView{
+_menuView = [[MenuView alloc] initWithFrame:CGRectMake(0, 64, SCREENWIDTH, 40)];
+//当按钮多时设置按钮宽度  不设置按钮按照屏幕宽度均分
+//    _menuView.buttonWidth = 40;
+_titleNames = @[@&quot;23&quot;,@&quot;23&quot;,@&quot;12&quot;,@&quot;12&quot;,@&quot;22&quot;,@&quot;33&quot;,@&quot;12&quot;,@&quot;11&quot;,@&quot;ewr&quot;,@&quot;wer&quot;];
+_menuView.menuDelegate = self;
+
+//设置按钮的默认颜色
+_menuView.normalColor = UIColorFromRGB(0x646464);
+//设置选中状态下按钮及下划线的颜色 默认为红色
+_menuView.selectColor = UIColorFromRGB(0x333333);
+
+//设置二个按钮之间的间距 默认状态为10px;
+_menuView.buttonSpace = 10;
+//设置按钮的字体大小   默认为13号字体
+_menuView.fontSize = 16;    
+//设置按钮的标题  请最后设置按钮标题  否则在设置标题之后的设置属性将无效
+_menuView.titleNames = _titleNames;
+[self.view addSubview:_menuView];
+_mainScrollView.contentSize = CGSizeMake(self.view.frame.size.width * _titleNames.count, 0);
+[self createDataSource];
+[self createListViewsWithTitleNames:_titleNames];
+}
+</code></pre>
+<p>OK，完成。<br>本人初学者一枚，希望大牛可以提出宝贵的意见！</p>
+
+	</div>
+	<div class="meta split">
+		<time class="post-date" datetime="2017-01-23T01:27:19.000Z" itemprop="datePublished">2017-01-23</time>
+	</div>
+</article>
+
+<!--评论-->
+
+	
+<div class="ds-thread" data-thread-key="2017_1_23" data-title="UIScrollView上下联动MenuView的实现" data-url="http://yoursite.com/2017/01/23/2017_1_23/"></div>
+<script type="text/javascript">
+
+var duoshuoQuery = {short_name:"yumemor"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+
+
+  
+</div>
+
+
+  <svg id="bigTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+    <path d="M0 0 L50 100 L100 0 Z"></path>
+  </svg>
+
+  
+
+
+  <div class="wrapper"></div>
+
+
+
+
+
+<div class="fat-footer">
+	<div class="wrapper">
+		<div class="layout layout--center">
+			<div class="layout__item palm-mb">
+				<div class="media">
+					<img class="headimg" src='http://ojcna80i7.bkt.clouddn.com/avatar.gif' alt='Json'>
+					<div class="media__body">
+						<h4>eastShine</h4>
+						<p class='site-description'>null</p>
+					</div>
+				</div>
+				<div class="author-contact">
+					<ul>
+						
+							
+							<li>
+				        		<a href="http://weibo.com/u/5789752029/home?wvr=5" target="_blank">
+				        			
+				        				<i class="iconfont icon-weibo"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://github.com/ever765" target="_blank">
+				        			
+				        				<i class="iconfont icon-github"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://www.zhihu.com/people/wang-dong-xu-14/activities" target="_blank">
+				        			
+										<i class="iconfont icon-zhihu"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<footer class="footer" role="contentinfo">
+	<div class="wrapper wrapper--wide split split--responsive">
+		<span>Theme by <a href="http://github.com/yumemor">Yumemor</a>. Powered by <a href="http://hexo.io">Hexo</a></span>
+	</div>
+</footer>
+
+	<!-－这里导入了 lib.js 里面涵盖了 jQuery 等框架 所以注释掉-->
+	<!--<script src="http://lib.sinaapp.com/js/jquery/2.0/jquery.min.js"></script>-->
+	<script src="/js/lib.js"></script>
+	<script src="/js/google-code-prettify/prettify.js"></script>
+	<script src="/js/module.js"></script>
+	<script src="/js/script.js"></script>
+	<script type='text/javascript'>
+		//代码高亮
+		$(document).ready(function(){
+	 		$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   			prettyPrint();
+		});
+	</script>
+	</body>
+</html>
