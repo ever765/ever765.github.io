@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     
-    <title>IOS运用CGContextRef画支付框 | eastShine</title>
+    <title>IOS运用CGContextRef画支付框 | Hexo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     
@@ -20,8 +20,8 @@
   <body>
 
 <header>
-	<a id="logo" href="/" title="eastShine">
-	<img src="/favicon.png" alt="eastShine"></a>
+	<a id="logo" href="/" title="Hexo">
+	<img src="/favicon.png" alt="Hexo"></a>
 	
 	
 		<!--搜索栏-->
@@ -81,88 +81,8 @@
 
 	<div class='post-body mb'>
 		<p>首先了解一下  CGContextRef ：<br> An opaque type that represents a Quartz 2D drawing environment.<br>Graphics Context是图形上下文,可以将其理解为一块画布,我们可以在上面进行绘画操作,绘制完成后,将画布放到我们的view中显示即可,view看作是一个画框. </p>
-<h2 id="自定义PayPassWordView类"><a href="#自定义PayPassWordView类" class="headerlink" title="自定义PayPassWordView类"></a>自定义PayPassWordView类</h2><pre><code class="bash">#import &lt;UIKit/UIKit.h&gt;
-
-@interface PayPassWordView : UIView
-//设置输入的支付密码
-@property (nonatomic, strong)NSString *str;
-
-//设置圆角
-
-@property (nonatomic, assign)CGFloat cornerRadius;
-@end
-</code></pre>
-<h2 id="实现PayPassWordView类"><a href="#实现PayPassWordView类" class="headerlink" title="实现PayPassWordView类"></a>实现PayPassWordView类</h2><pre><code class="bash">#import &quot;PayPassWordView.h&quot;
-
-@implementation PayPassWordView
-
-
-- (void)drawRect:(CGRect)rect {
-
-[super drawRect:rect];
-
-//An opaque type that represents a Quartz 2D drawing environment.
-//一个不透明类型的Quartz 2D绘画环境,相当于一个画布,你可以在上面任意绘画  
-CGContextRef context = UIGraphicsGetCurrentContext();
-
-//计算密码框的宽度
-float fw = ScreenWidth() - ViewWidth(102);
-//计算密码框的宽度
-float fh = (ScreenWidth() - ViewWidth(102))/6;
-//圆角的大小
-CGFloat f = ViewWidth(_cornerRadius);
-// 开始坐标右边开始
-CGContextMoveToPoint(context, fw, fh - f);  
-// 绘制右下角圆角
-CGContextAddArcToPoint(context, fw, fh, fw - f, fh, f / 2); 
-// 绘制左下角圆角
-CGContextAddArcToPoint(context, ViewWidth(1), fh, ViewWidth(1) , fh - f , f / 2);
-// 绘制左上角圆角
-CGContextAddArcToPoint(context, ViewWidth(1) , ViewWidth(1),  f, ViewWidth(1), f / 2); 
-// 绘制右上角圆角
-CGContextAddArcToPoint(context, fw, ViewWidth(1), fw, f, f / 2); 
-// 将圆角矩形封起来
-CGContextClosePath(context);
-
-//绘制第一条分割线
-CGContextMoveToPoint(context, fh, ViewWidth(1));
-CGContextAddLineToPoint(context, fh,fh);
-//绘制第二条分割线
-CGContextMoveToPoint(context,2 * fh, ViewWidth(1));
-CGContextAddLineToPoint(context, 2 * fh,fh);
-//绘制第仨条分割线
-CGContextMoveToPoint(context, 3 * fh, ViewWidth(1));
-CGContextAddLineToPoint(context, 3 * fh,fh);
-//绘制第四条分割线
-CGContextMoveToPoint(context, 4 * fh, ViewWidth(1));
-CGContextAddLineToPoint(context, 4 * fh,fh);
-//绘制第五条分割线
-CGContextMoveToPoint(context, 5 * fh, ViewWidth(1));
-CGContextAddLineToPoint(context, 5 * fh,fh);
-
-// 设置画笔颜色
-CGContextSetRGBStrokeColor(context, 0.5, 0.5, 0.5, 0.5);
-//根据上述坐标绘制路径
-CGContextStrokePath(context);
-
-for (NSInteger i = 0 ; i&lt;_str.length; i++) {
-//&quot;根据支付密码位数，绘制黑色小圆点
-CGContextFillEllipseInRect(context, CGRectMake(fh / 2 - 5 + i*fh, fh / 2 - 5, 10, 10));
-}
-}
-
-//实现str的set方法
-
-- (void)setStr:(NSString *)str
-{
-//设置输入的支付密码
-_str = str;
-//重绘界面
-[self setNeedsDisplay];
-}
-
-@end
-</code></pre>
+<h2 id="自定义PayPassWordView类"><a href="#自定义PayPassWordView类" class="headerlink" title="自定义PayPassWordView类"></a>自定义PayPassWordView类</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#import &lt;UIKit/UIKit.h&gt;</span></div><div class="line"></div><div class="line">@interface PayPassWordView : UIView</div><div class="line">//设置输入的支付密码</div><div class="line">@property (nonatomic, strong)NSString *str;</div><div class="line"></div><div class="line">//设置圆角</div><div class="line"></div><div class="line">@property (nonatomic, assign)CGFloat cornerRadius;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<h2 id="实现PayPassWordView类"><a href="#实现PayPassWordView类" class="headerlink" title="实现PayPassWordView类"></a>实现PayPassWordView类</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#import "PayPassWordView.h"</span></div><div class="line"></div><div class="line">@implementation PayPassWordView</div><div class="line"></div><div class="line"></div><div class="line">- (void)drawRect:(CGRect)rect &#123;</div><div class="line"></div><div class="line">[super drawRect:rect];</div><div class="line"></div><div class="line">//An opaque <span class="built_in">type</span> that represents a Quartz 2D drawing environment.</div><div class="line">//一个不透明类型的Quartz 2D绘画环境,相当于一个画布,你可以在上面任意绘画  </div><div class="line">CGContextRef context = UIGraphicsGetCurrentContext();</div><div class="line"></div><div class="line">//计算密码框的宽度</div><div class="line"><span class="built_in">float</span> fw = ScreenWidth() - ViewWidth(102);</div><div class="line">//计算密码框的宽度</div><div class="line"><span class="built_in">float</span> fh = (ScreenWidth() - ViewWidth(102))/6;</div><div class="line">//圆角的大小</div><div class="line">CGFloat f = ViewWidth(_cornerRadius);</div><div class="line">// 开始坐标右边开始</div><div class="line">CGContextMoveToPoint(context, fw, fh - f);  </div><div class="line">// 绘制右下角圆角</div><div class="line">CGContextAddArcToPoint(context, fw, fh, fw - f, fh, f / 2); </div><div class="line">// 绘制左下角圆角</div><div class="line">CGContextAddArcToPoint(context, ViewWidth(1), fh, ViewWidth(1) , fh - f , f / 2);</div><div class="line">// 绘制左上角圆角</div><div class="line">CGContextAddArcToPoint(context, ViewWidth(1) , ViewWidth(1),  f, ViewWidth(1), f / 2); </div><div class="line">// 绘制右上角圆角</div><div class="line">CGContextAddArcToPoint(context, fw, ViewWidth(1), fw, f, f / 2); </div><div class="line">// 将圆角矩形封起来</div><div class="line">CGContextClosePath(context);</div><div class="line"></div><div class="line">//绘制第一条分割线</div><div class="line">CGContextMoveToPoint(context, fh, ViewWidth(1));</div><div class="line">CGContextAddLineToPoint(context, fh,fh);</div><div class="line">//绘制第二条分割线</div><div class="line">CGContextMoveToPoint(context,2 * fh, ViewWidth(1));</div><div class="line">CGContextAddLineToPoint(context, 2 * fh,fh);</div><div class="line">//绘制第仨条分割线</div><div class="line">CGContextMoveToPoint(context, 3 * fh, ViewWidth(1));</div><div class="line">CGContextAddLineToPoint(context, 3 * fh,fh);</div><div class="line">//绘制第四条分割线</div><div class="line">CGContextMoveToPoint(context, 4 * fh, ViewWidth(1));</div><div class="line">CGContextAddLineToPoint(context, 4 * fh,fh);</div><div class="line">//绘制第五条分割线</div><div class="line">CGContextMoveToPoint(context, 5 * fh, ViewWidth(1));</div><div class="line">CGContextAddLineToPoint(context, 5 * fh,fh);</div><div class="line"></div><div class="line">// 设置画笔颜色</div><div class="line">CGContextSetRGBStrokeColor(context, 0.5, 0.5, 0.5, 0.5);</div><div class="line">//根据上述坐标绘制路径</div><div class="line">CGContextStrokePath(context);</div><div class="line"></div><div class="line"><span class="keyword">for</span> (NSInteger i = 0 ; i&lt;_str.length; i++) &#123;</div><div class="line">//<span class="string">"根据支付密码位数，绘制黑色小圆点</span></div><div class="line">CGContextFillEllipseInRect(context, CGRectMake(fh / 2 - 5 + i*fh, fh / 2 - 5, 10, 10));</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//实现str的set方法</div><div class="line"></div><div class="line">- (void)setStr:(NSString *)str</div><div class="line">&#123;</div><div class="line">//设置输入的支付密码</div><div class="line">_str = str;</div><div class="line">//重绘界面</div><div class="line">[self setNeedsDisplay];</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
 <p>最后奉上效果图<br><img src="http://ojcna80i7.bkt.clouddn.com/PayPassWorld.jpg" alt="PayPassWorld"></p>
 <p>OK，完成。<br>希望可以对大家有帮助，当然其他方法还有很多。在这里就不一一列举！</p>
 
@@ -212,9 +132,9 @@ var duoshuoQuery = {short_name:"yumemor"};
 		<div class="layout layout--center">
 			<div class="layout__item palm-mb">
 				<div class="media">
-					<img class="headimg" src='http://ojcna80i7.bkt.clouddn.com/avatar.gif' alt='Json'>
+					<img class="headimg" src='http://ojcna80i7.bkt.clouddn.com/avatar.gif' alt='John Doe'>
 					<div class="media__body">
-						<h4>eastShine</h4>
+						<h4>Hexo</h4>
 						<p class='site-description'>null</p>
 					</div>
 				</div>

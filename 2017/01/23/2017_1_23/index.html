@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     
-    <title>UIScrollView上下联动MenuView的实现 | eastShine</title>
+    <title>UIScrollView上下联动MenuView的实现 | Hexo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     
@@ -20,8 +20,8 @@
   <body>
 
 <header>
-	<a id="logo" href="/" title="eastShine">
-	<img src="/favicon.png" alt="eastShine"></a>
+	<a id="logo" href="/" title="Hexo">
+	<img src="/favicon.png" alt="Hexo"></a>
 	
 	
 		<!--搜索栏-->
@@ -80,167 +80,10 @@
   
 
 	<div class='post-body mb'>
-		<h2 id="定义头部-MenuView"><a href="#定义头部-MenuView" class="headerlink" title="定义头部 MenuView"></a>定义头部 MenuView</h2><pre><code class="bash">#import &lt;UIKit/UIKit.h&gt;
-
-@class MenuView;
-
-@protocol MenuViewDelegate &lt;NSObject&gt;
-
-- (void)menuView:(MenuView *)menuView didSelectIndex:(NSInteger)index;
-
-@end
-
-@interface MenuView : UIScrollView
-
-//每个按钮的title
-@property (nonatomic, strong)NSArray *titleNames;
-
-//每个按钮的颜色
-@property (nonatomic, strong)UIColor *selectColor;
-
-//每个按钮的颜色
-@property (nonatomic, strong)UIColor *normalColor;
-
-//每个按钮之间的间距   默认10px
-@property (nonatomic, assign)CGFloat buttonSpace;
-//设置背景颜色
-@property (nonatomic, strong)UIColor *backColor;
-//按钮titleLabel 字体大小
-@property (nonatomic, assign)CGFloat fontSize;
-//按钮的宽度
-@property (nonatomic, assign)CGFloat buttonWidth;
-//设置代理
-@property (nonatomic, weak)id &lt;MenuViewDelegate&gt; menuDelegate;
-//选中的按钮
-- (void)selectButtonWithIndex:(NSInteger)index;
-
-@end
-</code></pre>
-<h2 id="实现头部MenuView"><a href="#实现头部MenuView" class="headerlink" title="实现头部MenuView"></a>实现头部MenuView</h2><pre><code class="bash">#import &quot;MenuView.h&quot;
-#import &quot;CustomButton.h&quot;
-
-@interface MenuView (){
-NSMutableArray *_buttons;
-CustomButton *_lastButton;
-}
-
-@end
-
-@implementation MenuView
-
-- (instancetype)initWithFrame:(CGRect)frame{
-self = [super initWithFrame:frame];
-if (self) {
-_buttonSpace = 10;
-_selectColor = [UIColor redColor];
-_normalColor = [UIColor blackColor];
-_backColor = UIColorFromRGB(0xeeeeee);
-_buttons = [[NSMutableArray alloc] init];
-_fontSize = 13;
-
-}
-return self;
-}
-
-- (void)setTitleNames:(NSArray *)titleNames{
-
-_titleNames = titleNames;
-self.backgroundColor = _backColor;
-for (NSInteger index = 0; index &lt; _titleNames.count; index++) {
-CustomButton *button = [CustomButton buttonWithType:UIButtonTypeCustom];
-[button setTitle:titleNames[index] forState:UIControlStateNormal];
-button.frame = [self buttonFrameWithIndex:index];
-[button setTitleColor:_normalColor forState:UIControlStateNormal];
-[button setTitleColor:_selectColor forState:UIControlStateSelected];
-button.selectColor = _selectColor;
-button.titleLabel.font = [UIFont systemFontOfSize:_fontSize];
-button.tag = index;
-[button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchDown];
-[self addSubview:button];
-if (index == 0) {
-_lastButton = button;
-_lastButton.selected = YES;
-}
-[_buttons addObject:button];
-if (index == _titleNames.count - 1) {
-self.contentSize = CGSizeMake(CGRectGetMaxX(button.frame), VIEWHEIGHT);
-self.showsHorizontalScrollIndicator = NO;
-self.showsVerticalScrollIndicator = NO;
-}
-}
-}
-
-- (void)selectButtonWithIndex:(NSInteger)index
-{
-_lastButton.selected = NO;
-_lastButton = _buttons[index];
-_lastButton.selected = YES;
-if (_lastButton.frame.origin.x &gt; SCREENWIDTH - _lastButton.frame.size.width + _buttonSpace) {
-self.contentOffset = CGPointMake(_lastButton.frame.origin.x + _lastButton.frame.size.width + _buttonSpace - SCREENWIDTH , 0);
-}else{
-self.contentOffset = CGPointZero;
-}
-}
-
-- (void)buttonAction:(CustomButton *)button
-{
-if (![_lastButton isEqual:button]) {
-_lastButton.selected = NO;
-_lastButton = button;
-_lastButton.selected = YES;
-if ([_menuDelegate respondsToSelector:@selector(menuView:didSelectIndex:)]) {
-[_menuDelegate menuView:self didSelectIndex:button.tag];
-}
-}
-}
-
-- (CGRect)buttonFrameWithIndex:(NSInteger)index{
-CGRect rect;
-
-if (_buttonWidth) {
-rect =  CGRectMake(index  * (_buttonWidth +_buttonSpace) + _buttonSpace, VIEWHEIGHT / 4, _buttonWidth, VIEWHEIGHT / 2);
-}else{
-rect = CGRectMake(index * ((SCREENWIDTH - _titleNames.count * _buttonSpace)/_titleNames.count +_buttonSpace) + _buttonSpace, VIEWHEIGHT / 4, (SCREENWIDTH - _titleNames.count * _buttonSpace)/_titleNames.count, VIEWHEIGHT / 2);
-}
-return rect;
-}
-
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-// Drawing code
-}
-*/
-
-@end
-</code></pre>
+		<h2 id="定义头部-MenuView"><a href="#定义头部-MenuView" class="headerlink" title="定义头部 MenuView"></a>定义头部 MenuView</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#import &lt;UIKit/UIKit.h&gt;</span></div><div class="line"></div><div class="line">@class MenuView;</div><div class="line"></div><div class="line">@protocol MenuViewDelegate &lt;NSObject&gt;</div><div class="line"></div><div class="line">- (void)menuView:(MenuView *)menuView didSelectIndex:(NSInteger)index;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@interface MenuView : UIScrollView</div><div class="line"></div><div class="line">//每个按钮的title</div><div class="line">@property (nonatomic, strong)NSArray *titleNames;</div><div class="line"></div><div class="line">//每个按钮的颜色</div><div class="line">@property (nonatomic, strong)UIColor *selectColor;</div><div class="line"></div><div class="line">//每个按钮的颜色</div><div class="line">@property (nonatomic, strong)UIColor *normalColor;</div><div class="line"></div><div class="line">//每个按钮之间的间距   默认10px</div><div class="line">@property (nonatomic, assign)CGFloat buttonSpace;</div><div class="line">//设置背景颜色</div><div class="line">@property (nonatomic, strong)UIColor *backColor;</div><div class="line">//按钮titleLabel 字体大小</div><div class="line">@property (nonatomic, assign)CGFloat fontSize;</div><div class="line">//按钮的宽度</div><div class="line">@property (nonatomic, assign)CGFloat buttonWidth;</div><div class="line">//设置代理</div><div class="line">@property (nonatomic, weak)id &lt;MenuViewDelegate&gt; menuDelegate;</div><div class="line">//选中的按钮</div><div class="line">- (void)selectButtonWithIndex:(NSInteger)index;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<h2 id="实现头部MenuView"><a href="#实现头部MenuView" class="headerlink" title="实现头部MenuView"></a>实现头部MenuView</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#import "MenuView.h"</span></div><div class="line"><span class="comment">#import "CustomButton.h"</span></div><div class="line"></div><div class="line">@interface <span class="function"><span class="title">MenuView</span></span> ()&#123;</div><div class="line">NSMutableArray *_buttons;</div><div class="line">CustomButton *_lastButton;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@implementation MenuView</div><div class="line"></div><div class="line">- (instancetype)initWithFrame:(CGRect)frame&#123;</div><div class="line">self = [super initWithFrame:frame];</div><div class="line"><span class="keyword">if</span> (self) &#123;</div><div class="line">_buttonSpace = 10;</div><div class="line">_selectColor = [UIColor redColor];</div><div class="line">_normalColor = [UIColor blackColor];</div><div class="line">_backColor = UIColorFromRGB(0xeeeeee);</div><div class="line">_buttons = [[NSMutableArray alloc] init];</div><div class="line">_fontSize = 13;</div><div class="line"></div><div class="line">&#125;</div><div class="line"><span class="built_in">return</span> self;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)<span class="built_in">set</span>TitleNames:(NSArray *)titleNames&#123;</div><div class="line"></div><div class="line">_titleNames = titleNames;</div><div class="line">self.backgroundColor = _backColor;</div><div class="line"><span class="keyword">for</span> (NSInteger index = 0; index &lt; _titleNames.count; index++) &#123;</div><div class="line">CustomButton *button = [CustomButton buttonWithType:UIButtonTypeCustom];</div><div class="line">[button <span class="built_in">set</span>Title:titleNames[index] <span class="keyword">for</span>State:UIControlStateNormal];</div><div class="line">button.frame = [self buttonFrameWithIndex:index];</div><div class="line">[button <span class="built_in">set</span>TitleColor:_normalColor <span class="keyword">for</span>State:UIControlStateNormal];</div><div class="line">[button <span class="built_in">set</span>TitleColor:_selectColor <span class="keyword">for</span>State:UIControlStateSelected];</div><div class="line">button.selectColor = _selectColor;</div><div class="line">button.titleLabel.font = [UIFont systemFontOfSize:_fontSize];</div><div class="line">button.tag = index;</div><div class="line">[button addTarget:self action:@selector(buttonAction:) <span class="keyword">for</span>ControlEvents:UIControlEventTouchDown];</div><div class="line">[self addSubview:button];</div><div class="line"><span class="keyword">if</span> (index == 0) &#123;</div><div class="line">_lastButton = button;</div><div class="line">_lastButton.selected = YES;</div><div class="line">&#125;</div><div class="line">[_buttons addObject:button];</div><div class="line"><span class="keyword">if</span> (index == _titleNames.count - 1) &#123;</div><div class="line">self.contentSize = CGSizeMake(CGRectGetMaxX(button.frame), VIEWHEIGHT);</div><div class="line">self.showsHorizontalScrollIndicator = NO;</div><div class="line">self.showsVerticalScrollIndicator = NO;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)selectButtonWithIndex:(NSInteger)index</div><div class="line">&#123;</div><div class="line">_lastButton.selected = NO;</div><div class="line">_lastButton = _buttons[index];</div><div class="line">_lastButton.selected = YES;</div><div class="line"><span class="keyword">if</span> (_lastButton.frame.origin.x &gt; SCREENWIDTH - _lastButton.frame.size.width + _buttonSpace) &#123;</div><div class="line">self.contentOffset = CGPointMake(_lastButton.frame.origin.x + _lastButton.frame.size.width + _buttonSpace - SCREENWIDTH , 0);</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">self.contentOffset = CGPointZero;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)buttonAction:(CustomButton *)button</div><div class="line">&#123;</div><div class="line"><span class="keyword">if</span> (![_lastButton isEqual:button]) &#123;</div><div class="line">_lastButton.selected = NO;</div><div class="line">_lastButton = button;</div><div class="line">_lastButton.selected = YES;</div><div class="line"><span class="keyword">if</span> ([_menuDelegate respondsToSelector:@selector(menuView:didSelectIndex:)]) &#123;</div><div class="line">[_menuDelegate menuView:self didSelectIndex:button.tag];</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (CGRect)buttonFrameWithIndex:(NSInteger)index&#123;</div><div class="line">CGRect rect;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (_buttonWidth) &#123;</div><div class="line">rect =  CGRectMake(index  * (_buttonWidth +_buttonSpace) + _buttonSpace, VIEWHEIGHT / 4, _buttonWidth, VIEWHEIGHT / 2);</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">rect = CGRectMake(index * ((SCREENWIDTH - _titleNames.count * _buttonSpace)/_titleNames.count +_buttonSpace) + _buttonSpace, VIEWHEIGHT / 4, (SCREENWIDTH - _titleNames.count * _buttonSpace)/_titleNames.count, VIEWHEIGHT / 2);</div><div class="line">&#125;</div><div class="line"><span class="built_in">return</span> rect;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">/*</div><div class="line">// Only override drawRect: <span class="keyword">if</span> you perform custom drawing.</div><div class="line">// An empty implementation adversely affects performance during animation.</div><div class="line">- (void)drawRect:(CGRect)rect &#123;</div><div class="line">// Drawing code</div><div class="line">&#125;</div><div class="line">*/</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
 <p>最后奉上效果图<br><img src="http://ojcna80i7.bkt.clouddn.com/image1.png" alt="PayPassWorld"></p>
-<h1 id="在ViewControllers里调用方法为"><a href="#在ViewControllers里调用方法为" class="headerlink" title="在ViewControllers里调用方法为"></a>在ViewControllers里调用方法为</h1><pre><code class="bash">- (void)createMenuScrollView{
-_menuView = [[MenuView alloc] initWithFrame:CGRectMake(0, 64, SCREENWIDTH, 40)];
-//当按钮多时设置按钮宽度  不设置按钮按照屏幕宽度均分
-//    _menuView.buttonWidth = 40;
-_titleNames = @[@&quot;23&quot;,@&quot;23&quot;,@&quot;12&quot;,@&quot;12&quot;,@&quot;22&quot;,@&quot;33&quot;,@&quot;12&quot;,@&quot;11&quot;,@&quot;ewr&quot;,@&quot;wer&quot;];
-_menuView.menuDelegate = self;
-
-//设置按钮的默认颜色
-_menuView.normalColor = UIColorFromRGB(0x646464);
-//设置选中状态下按钮及下划线的颜色 默认为红色
-_menuView.selectColor = UIColorFromRGB(0x333333);
-
-//设置二个按钮之间的间距 默认状态为10px;
-_menuView.buttonSpace = 10;
-//设置按钮的字体大小   默认为13号字体
-_menuView.fontSize = 16;    
-//设置按钮的标题  请最后设置按钮标题  否则在设置标题之后的设置属性将无效
-_menuView.titleNames = _titleNames;
-[self.view addSubview:_menuView];
-_mainScrollView.contentSize = CGSizeMake(self.view.frame.size.width * _titleNames.count, 0);
-[self createDataSource];
-[self createListViewsWithTitleNames:_titleNames];
-}
-</code></pre>
+<h1 id="在ViewControllers里调用方法为"><a href="#在ViewControllers里调用方法为" class="headerlink" title="在ViewControllers里调用方法为"></a>在ViewControllers里调用方法为</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">- (void)createMenuScrollView&#123;</div><div class="line">_menuView = [[MenuView alloc] initWithFrame:CGRectMake(0, 64, SCREENWIDTH, 40)];</div><div class="line">//当按钮多时设置按钮宽度  不设置按钮按照屏幕宽度均分</div><div class="line">//    _menuView.buttonWidth = 40;</div><div class="line">_titleNames = @[@<span class="string">"23"</span>,@<span class="string">"23"</span>,@<span class="string">"12"</span>,@<span class="string">"12"</span>,@<span class="string">"22"</span>,@<span class="string">"33"</span>,@<span class="string">"12"</span>,@<span class="string">"11"</span>,@<span class="string">"ewr"</span>,@<span class="string">"wer"</span>];</div><div class="line">_menuView.menuDelegate = self;</div><div class="line"></div><div class="line">//设置按钮的默认颜色</div><div class="line">_menuView.normalColor = UIColorFromRGB(0x646464);</div><div class="line">//设置选中状态下按钮及下划线的颜色 默认为红色</div><div class="line">_menuView.selectColor = UIColorFromRGB(0x333333);</div><div class="line"></div><div class="line">//设置二个按钮之间的间距 默认状态为10px;</div><div class="line">_menuView.buttonSpace = 10;</div><div class="line">//设置按钮的字体大小   默认为13号字体</div><div class="line">_menuView.fontSize = 16;    </div><div class="line">//设置按钮的标题  请最后设置按钮标题  否则在设置标题之后的设置属性将无效</div><div class="line">_menuView.titleNames = _titleNames;</div><div class="line">[self.view addSubview:_menuView];</div><div class="line">_mainScrollView.contentSize = CGSizeMake(self.view.frame.size.width * _titleNames.count, 0);</div><div class="line">[self createDataSource];</div><div class="line">[self createListViewsWithTitleNames:_titleNames];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>OK，完成。<br>本人初学者一枚，希望大牛可以提出宝贵的意见！</p>
 
 	</div>
@@ -289,9 +132,9 @@ var duoshuoQuery = {short_name:"yumemor"};
 		<div class="layout layout--center">
 			<div class="layout__item palm-mb">
 				<div class="media">
-					<img class="headimg" src='http://ojcna80i7.bkt.clouddn.com/avatar.gif' alt='Json'>
+					<img class="headimg" src='http://ojcna80i7.bkt.clouddn.com/avatar.gif' alt='John Doe'>
 					<div class="media__body">
-						<h4>eastShine</h4>
+						<h4>Hexo</h4>
 						<p class='site-description'>null</p>
 					</div>
 				</div>

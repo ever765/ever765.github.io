@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     
-    <title>UIScrollView上下联动自定义Button的实现 | eastShine</title>
+    <title>UIScrollView上下联动自定义Button的实现 | Hexo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     
@@ -20,8 +20,8 @@
   <body>
 
 <header>
-	<a id="logo" href="/" title="eastShine">
-	<img src="/favicon.png" alt="eastShine"></a>
+	<a id="logo" href="/" title="Hexo">
+	<img src="/favicon.png" alt="Hexo"></a>
 	
 	
 		<!--搜索栏-->
@@ -80,87 +80,10 @@
   
 
 	<div class='post-body mb'>
-		<h2 id="自定义Button"><a href="#自定义Button" class="headerlink" title="自定义Button"></a>自定义Button</h2><pre><code class="bash">#import &lt;UIKit/UIKit.h&gt;
-
-@interface CustomButton : UIButton
-
-//每个按钮的颜色
-@property (nonatomic, strong)UIColor *selectColor;
-
-@end
-</code></pre>
-<h2 id="实现Button类"><a href="#实现Button类" class="headerlink" title="实现Button类"></a>实现Button类</h2><pre><code class="bash">#import &quot;CustomButton.h&quot;
-
-@interface CustomButton (){
-CALayer *_layer;
-}
-
-@end
-@implementation CustomButton
-
-- (void)setSelected:(BOOL)selected{
-[super setSelected:selected];
-if (!_layer) {
-[self createLayer];
-}
-if (selected) {
-[self.layer addSublayer:_layer];
-[UIView animateWithDuration:0.2 animations:^{
-self.transform =  CGAffineTransformMakeScale(1.2, 1.2);
-}];
-}else{
-[_layer removeFromSuperlayer];
-self.transform = CGAffineTransformIdentity;
-}
-}
-
-
-- (void)createLayer{
-_layer = [[CALayer alloc] init];
-_layer.frame = CGRectMake(self.frame.size.width / 4, self.frame.size.height - 1, self.frame.size.width / 2, 1);
-if (_selectColor) {
-_layer.backgroundColor = _selectColor.CGColor;
-}else{
-_layer.backgroundColor = [UIColor redColor].CGColor;
-}
-}
-</code></pre>
+		<h2 id="自定义Button"><a href="#自定义Button" class="headerlink" title="自定义Button"></a>自定义Button</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#import &lt;UIKit/UIKit.h&gt;</span></div><div class="line"></div><div class="line">@interface CustomButton : UIButton</div><div class="line"></div><div class="line">//每个按钮的颜色</div><div class="line">@property (nonatomic, strong)UIColor *selectColor;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<h2 id="实现Button类"><a href="#实现Button类" class="headerlink" title="实现Button类"></a>实现Button类</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#import "CustomButton.h"</span></div><div class="line"></div><div class="line">@interface <span class="function"><span class="title">CustomButton</span></span> ()&#123;</div><div class="line">CALayer *_layer;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div><div class="line">@implementation CustomButton</div><div class="line"></div><div class="line">- (void)<span class="built_in">set</span>Selected:(BOOL)selected&#123;</div><div class="line">[super <span class="built_in">set</span>Selected:selected];</div><div class="line"><span class="keyword">if</span> (!_layer) &#123;</div><div class="line">[self createLayer];</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span> (selected) &#123;</div><div class="line">[self.layer addSublayer:_layer];</div><div class="line">[UIView animateWithDuration:0.2 animations:^&#123;</div><div class="line">self.transform =  CGAffineTransformMakeScale(1.2, 1.2);</div><div class="line">&#125;];</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">[_layer removeFromSuperlayer];</div><div class="line">self.transform = CGAffineTransformIdentity;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">- (void)createLayer&#123;</div><div class="line">_layer = [[CALayer alloc] init];</div><div class="line">_layer.frame = CGRectMake(self.frame.size.width / 4, self.frame.size.height - 1, self.frame.size.width / 2, 1);</div><div class="line"><span class="keyword">if</span> (_selectColor) &#123;</div><div class="line">_layer.backgroundColor = _selectColor.CGColor;</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">_layer.backgroundColor = [UIColor redColor].CGColor;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>最后奉上效果图<br><img src="http://ojcna80i7.bkt.clouddn.com/button.png" alt="PayPassWorld"></p>
-<p>然后就可以将button添加到uiscrollerView就可以实现了在别处调用时代码如下</p>
-<pre><code class="bash">@implementation viewController
- NotButton *_lastButton;
-//创建button
-for (NSInteger i = 0 ; i&lt;array.count; i++) {
-NotButton *button = [NotButton buttonWithType:UIButtonTypeCustom];
-button.frame = CGRectMake(ViewWidth(30)+ScreenWidth()/3*i, 0, rect.size.width, ViewWidth(100));
-button.titleLabel.font = [UIFont systemFontOfSize:titleFontSize];
-[button setTitle:array[i] forState:UIControlStateNormal];
-[button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchDown];
-button.tag = i;
-[button setTitleColor:UIColorFromRGB(0x333333) forState:UIControlStateNormal];
-[view addSubview:button];
-
-UIView *linView = [[UIView alloc] initWithFrame:CGRectMake(ScreenWidth()/3  * (i + 1), 0, 1, rect.size.height)];
-linView.backgroundColor = LINECOLOR;
-linView.center = CGPointMake(linView.center.x, ViewWidth(50));
-[view addSubview:linView];
-if (i == 0) {
-_lastButton = button;
-_lastButton.selected = YES;
-}
-
-
-- (void)buttonAction:(NotButton *)button{
-if (_lastButton) {
-[_lastButton setSelected:NO];
-_lastButton = button;
-[_lastButton setSelected:YES];
-//这里写点击事件
-}
-}
-
-@end
-</code></pre>
+<p>然后就可以将button添加到uiscrollerView就可以实现了在别处调用时代码如下<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">@implementation viewController</div><div class="line"> NotButton *_lastButton;</div><div class="line">//创建button</div><div class="line"><span class="keyword">for</span> (NSInteger i = 0 ; i&lt;array.count; i++) &#123;</div><div class="line">NotButton *button = [NotButton buttonWithType:UIButtonTypeCustom];</div><div class="line">button.frame = CGRectMake(ViewWidth(30)+ScreenWidth()/3*i, 0, rect.size.width, ViewWidth(100));</div><div class="line">button.titleLabel.font = [UIFont systemFontOfSize:titleFontSize];</div><div class="line">[button <span class="built_in">set</span>Title:array[i] <span class="keyword">for</span>State:UIControlStateNormal];</div><div class="line">[button addTarget:self action:@selector(buttonAction:) <span class="keyword">for</span>ControlEvents:UIControlEventTouchDown];</div><div class="line">button.tag = i;</div><div class="line">[button <span class="built_in">set</span>TitleColor:UIColorFromRGB(0x333333) <span class="keyword">for</span>State:UIControlStateNormal];</div><div class="line">[view addSubview:button];</div><div class="line"></div><div class="line">UIView *linView = [[UIView alloc] initWithFrame:CGRectMake(ScreenWidth()/3  * (i + 1), 0, 1, rect.size.height)];</div><div class="line">linView.backgroundColor = LINECOLOR;</div><div class="line">linView.center = CGPointMake(linView.center.x, ViewWidth(50));</div><div class="line">[view addSubview:linView];</div><div class="line"><span class="keyword">if</span> (i == 0) &#123;</div><div class="line">_lastButton = button;</div><div class="line">_lastButton.selected = YES;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">- (void)buttonAction:(NotButton *)button&#123;</div><div class="line"><span class="keyword">if</span> (_lastButton) &#123;</div><div class="line">[_lastButton <span class="built_in">set</span>Selected:NO];</div><div class="line">_lastButton = button;</div><div class="line">[_lastButton <span class="built_in">set</span>Selected:YES];</div><div class="line">//这里写点击事件</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure></p>
 <p>OK，完成。<br>本人初学者一枚，希望大牛可以提出宝贵的意见！</p>
 
 	</div>
@@ -209,9 +132,9 @@ var duoshuoQuery = {short_name:"yumemor"};
 		<div class="layout layout--center">
 			<div class="layout__item palm-mb">
 				<div class="media">
-					<img class="headimg" src='http://ojcna80i7.bkt.clouddn.com/avatar.gif' alt='Json'>
+					<img class="headimg" src='http://ojcna80i7.bkt.clouddn.com/avatar.gif' alt='John Doe'>
 					<div class="media__body">
-						<h4>eastShine</h4>
+						<h4>Hexo</h4>
 						<p class='site-description'>null</p>
 					</div>
 				</div>
